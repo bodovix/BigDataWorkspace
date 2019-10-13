@@ -1,0 +1,45 @@
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class ReduceData extends Reducer<Text, Text,Text,Text> {
+    @Override
+    public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException{
+
+        int count = 0;
+        int totalSalary = 0;
+        float averageSalary = 0;
+        ArrayList<Text> valuesArray = new ArrayList<Text>();
+        //get the average salary for this Role and Type
+        for (Text value:values)
+        {
+        	String[] valueValues = value.toString().split(",");
+    		int salary = Integer.parseInt(valueValues[1]);
+    		
+        	totalSalary += salary;
+            count += 1;
+            valuesArray.add(value);
+        }
+        
+        averageSalary = totalSalary / count;
+        float onePercent = averageSalary / 100;
+        int percentage = 100 + PercentageAllowed.percentageAllowed;
+        float cutOfPoint = onePercent * percentage;
+
+        //find out if employee is over average salary
+        for (Text value:valuesArray)
+        {
+        	String[] valueValues = value.toString().split(",");
+        	String employeeRole = valueValues[0];
+        	String employeeType = valueValues[2];
+    		int salary = Integer.parseInt(valueValues[1]);
+    		
+    		//if over cut of point output them
+        	if(salary > cutOfPoint){
+                context.write(new Text(employeeRole + employeeType +":"), new Text(valueValues[1]));
+        	}
+        }
+    }
+}

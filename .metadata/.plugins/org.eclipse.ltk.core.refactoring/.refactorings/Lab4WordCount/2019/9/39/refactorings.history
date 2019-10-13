@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 4 elements from project &apos;Lab 4&apos;&#x0A;- Original project: &apos;Lab 4&apos;&#x0A;- Original elements:&#x0A;     StubDriver.java&#x0A;     StubMapper.java&#x0A;     StubReducer.java&#x0A;     StubTest.java" description="Delete elements" element1="/src&lt;{StubDriver.java" element2="/src&lt;{StubReducer.java" element3="/src&lt;{StubTest.java" element4="/src&lt;{StubMapper.java" elements="4" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1569323471616" subPackages="false" version="1.0"/>
+</session>

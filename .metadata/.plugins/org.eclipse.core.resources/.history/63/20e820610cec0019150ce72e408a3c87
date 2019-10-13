@@ -1,0 +1,39 @@
+import org.apache.hadoop.io.FloatWritable;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+
+import java.io.IOException;
+
+
+
+
+public class WordCountMapper extends Mapper<LongWritable,Text,Text,Text> {
+@Override
+
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
+
+		String agencyNumber;
+		String employeeRole;
+		String employeeType;
+		String salary;
+	    String line = value.toString();
+	   // String[] tuple = line.split("\\n");
+	    //for(int i=0; i < tuple.length;i++){
+	    	
+	    		
+	    	//get required values from JSon object
+	    	String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+	    	agencyNumber = data[0];
+	    	if(agencyNumber.equals("AGENCY #")){
+	    		return;
+	    	}
+	    	employeeRole = data[2];
+	    	employeeType = data[4];
+	    	salary = data[5];
+	    	//add to output key pair
+	    	context.write(new Text(employeeRole + "," + employeeType), new Text(agencyNumber +"," +  salary));
+	    //}
+	}
+}

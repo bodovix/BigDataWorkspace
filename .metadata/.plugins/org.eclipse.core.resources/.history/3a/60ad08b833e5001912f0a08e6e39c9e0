@@ -1,0 +1,37 @@
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.json.*;
+import java.io.IOException;
+
+
+
+
+public class WordCountMapper extends Mapper<LongWritable,Text,Text,IntWritable> {
+@Override
+
+    public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
+
+
+	String id;
+	float quantity;
+    String line = value.toString();
+    String[] tuple = line.split("\\n");
+ 
+    for(int i=0; i < tuple.length;i++){
+    	JSONObject json = new JSONObject(tuple[i]);
+    	id = json.getString("Name");
+    	quantity = json.getFloat("Salary");
+    	
+    	context.write(new Text(id), new FloatWritable(quantity));
+    }
+    
+//    for (String word : line.split(" ")){
+//        if(word.length()>0){
+//            context.write(new Text(word),new IntWritable(1));
+//        }
+//    }
+}
+
+}

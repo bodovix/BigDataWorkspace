@@ -1,0 +1,40 @@
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+import java.io.IOException;
+
+public class WordCountReducer extends Reducer<Text, IntWritable,Text,IntWritable> {
+    @Override
+    public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException{
+
+    	String keyValues[] = key.toString().split("\\n");
+
+		String employeeRole = keyValues[0];
+		String employeeType = keyValues[1];
+
+        int count = 0;
+        int totalSalary = 0;
+        float averageSalary = 0;
+        //get the average salary for this Role and Type
+        for (IntWritable value:values)
+        {
+        	String[] valueValues = values.toString().split("\\n");
+        	String employeeId = valueValues[0];
+    		int salary = Integer.parseInt(valueValues[1]);
+    		
+        	totalSalary += salary;
+            count += value.get();
+        }
+        averageSalary = totalSalary / count;
+        
+        //find out if employee is over average salary
+        for (IntWritable value:values)
+        {
+        	
+        }
+
+        context.write(key, new IntWritable(count));
+
+    }
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;WordCount&apos; to &apos;CharCountAditional&apos;&#x0A;- Original project: &apos;Lab4AdditionalExersise&apos;&#x0A;- Original element: &apos;WordCount&apos;&#x0A;- Renamed element: &apos;CharCountAditional&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;WordCount&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{WordCount.java[WordCount" matchStrategy="1" name="CharCountAditional" qualified="false" references="true" similarDeclarations="false" stamp="1569327263325" textual="false" version="1.0"/>
+</session>
